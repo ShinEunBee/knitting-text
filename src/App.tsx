@@ -1,35 +1,94 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { fonts, renderPixels } from "js-pixel-fonts";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+type Grid = boolean[][];
+
+export default function App() {
+  const [inputText, setInputText] = useState<string>("");
+  const [grid, setGrid] = useState<Grid>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(e.target.value);
+  };
+
+  const handleUpdate = () => {
+    if (!inputText) {
+      setGrid([]);
+      return;
+    }
+
+    try {
+      console.log(inputText);
+
+
+      const raw: (boolean | number)[][] = renderPixels(
+        inputText,
+        fonts.sevenPlus
+      );
+
+      const next: Grid = raw.map((row) => row.map(Boolean));
+
+      setGrid(next);
+    } catch (err) {
+      console.error("renderPixels failed:", err);
+      setGrid([]);
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p>글자를 입력해 주세요.</p>
+      <input type="text" value={inputText} onChange={handleChange} />
+      <button onClick={handleUpdate}>만들기</button>
+
+      {/* 디버그: 결과 그리드 확인 */}
+      {/* <pre style={{ fontSize: 12 }}>{JSON.stringify(grid, null, 2)}</pre> */}
+
+      {/* 간단 SVG 미리보기 (선택) */}
+      <SVGPreview grid={grid} cellSize={24} />
     </>
-  )
+  );
 }
 
-export default App
+function SVGPreview({
+  grid,
+  cellSize = 24,
+}: {
+  grid: Grid;
+  cellSize?: number;
+}) {
+  const rows = grid.length;
+  const cols = rows ? grid[0].length : 0;
+  if (!rows || !cols) return null;
+
+  return (
+    <svg
+      width={cols * cellSize}
+      height={rows * cellSize}
+      viewBox={`0 0 ${cols * cellSize} ${rows * cellSize}`}
+      shapeRendering="crispEdges"
+      style={{
+        display: "block",
+        background: "#fff",
+        marginTop: 12,
+        border: "1px solid #eee",
+      }}
+    >
+      {grid.map((row, r) =>
+        row.map((v, c) => (
+          <rect
+            key={`${r}-${c}`}
+            x={c * cellSize}
+            y={r * cellSize}
+            width={cellSize}
+            height={cellSize}
+            fill={v ? "#000" : "#fff"}
+            stroke="#bfbfbf"
+            strokeWidth={1}
+          />
+        ))
+      )}
+    </svg>
+  );
+}

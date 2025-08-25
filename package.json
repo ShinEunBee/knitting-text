@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "js-pixel-fonts": "^1.6.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
@@ -28,5 +31,6 @@
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
     "vite-plugin-node-polyfills": "^0.24.0"
-  }
+  },
+  "homepage": "https://shineunbee.github.io/knitting-text"
 }

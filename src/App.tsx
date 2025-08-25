@@ -19,9 +19,6 @@ export default function App() {
     }
 
     try {
-      console.log(inputText);
-
-
       const raw: (boolean | number)[][] = renderPixels(
         inputText,
         fonts.sevenPlus
@@ -39,13 +36,12 @@ export default function App() {
   return (
     <>
       <p>글자를 입력해 주세요.</p>
+      <p>지원 문자 : 영어(대문자, 소문자), 숫자, 특수문자(₩ 제외)</p>
       <input type="text" value={inputText} onChange={handleChange} />
       <button onClick={handleUpdate}>만들기</button>
 
-      {/* 디버그: 결과 그리드 확인 */}
-      {/* <pre style={{ fontSize: 12 }}>{JSON.stringify(grid, null, 2)}</pre> */}
+      <p>{grid.length} X {grid[0]?.length ?? 0}</p>
 
-      {/* 간단 SVG 미리보기 (선택) */}
       <SVGPreview grid={grid} cellSize={24} />
     </>
   );

@@ -4,6 +4,7 @@ import { saveGrid } from "./features/saveGrid";
 import { renderGrid } from "./features/renderGrid";
 import PatternGrid from "./components/patternGrid";
 import "./App.css";
+import MainLogo from "./components/MainLogo";
 
 export default function App() {
   const [inputText, setInputText] = useState<string>("");
@@ -15,10 +16,12 @@ export default function App() {
 
   const handleUpdate = () => {
     setGrid(renderGrid(inputText));
-  }
+  };
 
   return (
-    <>
+    <div className="container">
+      <MainLogo />
+
       <p>글자를 입력해 주세요.</p>
       <p>지원 문자 : 영어(대문자, 소문자), 숫자, 특수문자(₩ 제외)</p>
       <input type="text" value={inputText} onChange={handleChange} />
@@ -31,6 +34,6 @@ export default function App() {
       <PatternGrid grid={grid} cellSize={24} />
 
       <button onClick={saveGrid}>이미지 저장</button>
-    </>
+    </div>
   );
 }

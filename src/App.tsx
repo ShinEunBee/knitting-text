@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Grid } from "./features/types";
 import { saveGrid } from "./features/saveGrid";
 import { renderGrid } from "./features/renderGrid";
-import PatternGrid from "./components/patternGrid";
+import PatternGrid from "./components/PatternGrid";
 import "./App.css";
 import MainLogo from "./components/MainLogo";
 

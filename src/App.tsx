@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fonts, renderPixels } from "js-pixel-fonts";
+import { saveSvgAsPng } from "save-svg-as-png";
 import "./App.css";
 
 type Grid = boolean[][];
@@ -33,6 +34,16 @@ export default function App() {
     }
   };
 
+  const handleSave = () => {
+    const svg = document.getElementById("knittingSVG") as SVGSVGElement | null;
+    if (!svg) return;
+
+    saveSvgAsPng(svg, "your-text.png", {
+      scale: 3, // 해상도
+      backgroundColor: "#ffffff"
+    });
+  };
+
   return (
     <>
       <p>글자를 입력해 주세요.</p>
@@ -40,9 +51,13 @@ export default function App() {
       <input type="text" value={inputText} onChange={handleChange} />
       <button onClick={handleUpdate}>만들기</button>
 
-      <p>{grid.length} X {grid[0]?.length ?? 0}</p>
+      <p>
+        {grid.length} X {grid[0]?.length ?? 0}
+      </p>
 
       <SVGPreview grid={grid} cellSize={24} />
+
+      <button onClick={handleSave}>아미지 저장</button>
     </>
   );
 }
@@ -60,6 +75,7 @@ function SVGPreview({
 
   return (
     <svg
+      id="knittingSVG"
       width={cols * cellSize}
       height={rows * cellSize}
       viewBox={`0 0 ${cols * cellSize} ${rows * cellSize}`}

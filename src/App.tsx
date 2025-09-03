@@ -57,7 +57,7 @@ export default function App() {
 
       <SVGPreview grid={grid} cellSize={24} />
 
-      <button onClick={handleSave}>아미지 저장</button>
+      <button onClick={handleSave}>이미지 저장</button>
     </>
   );
 }

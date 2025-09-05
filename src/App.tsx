@@ -3,37 +3,74 @@ import type { Grid } from "./features/types";
 import { saveGrid } from "./features/saveGrid";
 import { renderGrid } from "./features/renderGrid";
 import PatternGrid from "./components/PatternGrid";
+import {
+  Header,
+  LogoBox,
+  Title,
+  Container,
+  Meta,
+  InputRow,
+  Button,
+  Controls,
+  SvgContainer,
+  TextInput,
+  Footer,
+} from "./styles/ui";
 import "./App.css";
-import MainLogo from "./components/MainLogo";
+import logo from "./assets/main-image.png";
 
 export default function App() {
   const [inputText, setInputText] = useState<string>("");
   const [grid, setGrid] = useState<Grid>([]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
-  };
 
   const handleUpdate = () => {
     setGrid(renderGrid(inputText));
   };
 
   return (
-    <div className="container">
-      <MainLogo />
+    <>
+      <Header>
+        <LogoBox>
+          <img src={logo} alt="logo" />
+          <Title>뜨개로운 인생</Title>
+        </LogoBox>
+      </Header>
 
-      <p>글자를 입력해 주세요.</p>
-      <p>지원 문자 : 영어(대문자, 소문자), 숫자, 특수문자(₩ 제외)</p>
-      <input type="text" value={inputText} onChange={handleChange} />
-      <button onClick={handleUpdate}>만들기</button>
+      <Container>
+        <Controls>
+          <InputRow>
+            <TextInput
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="지원 문자 : 영어(대문자, 소문자), 숫자, 특수문자(₩ 제외)"
+            />
+            <Button onClick={handleUpdate}>만들기</Button>
+            <Button variant="ghost" onClick={saveGrid}>
+              이미지 저장
+            </Button>
+          </InputRow>
 
-      <p>
-        {grid.length} X {grid[0]?.length ?? 0}
-      </p>
+          <Meta>
+            <span>
+              도안 크기: {grid.length} × {grid[0]?.length ?? 0}
+            </span>
+          </Meta>
+        </Controls>
 
-      <PatternGrid grid={grid} cellSize={24} />
+        <SvgContainer>
+          <PatternGrid grid={grid} cellSize={24} />
+        </SvgContainer>
+      </Container>
 
-      <button onClick={saveGrid}>이미지 저장</button>
-    </div>
+      <Footer>© {new Date().getFullYear()} ggang2</Footer>
+    </>
   );
 }
+
+/**
+ *
+ * 추가 개발
+ *
+ * 1. 상하좌우 여백 추가
+ * 2. 여러 줄 입력 / 도안 생성
+ */

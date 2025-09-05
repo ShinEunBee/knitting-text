@@ -7,7 +7,7 @@ export function saveGrid() {
         return;
     }
 
-    saveSvgAsPng(svg, "your-text.png", {
+    saveSvgAsPng(svg, "knitting-text.png", {
         scale: 3, // 해상도
         backgroundColor: "#ffffff"
     });

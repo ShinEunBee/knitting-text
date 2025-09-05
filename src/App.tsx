@@ -6,7 +6,6 @@ import PatternGrid from "./components/PatternGrid";
 import {
   Header,
   LogoBox,
-  Title,
   Container,
   Meta,
   InputRow,
@@ -32,7 +31,6 @@ export default function App() {
       <Header>
         <LogoBox>
           <img src={logo} alt="logo" />
-          <Title>뜨개로운 인생</Title>
         </LogoBox>
       </Header>
 

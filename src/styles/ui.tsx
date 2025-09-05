@@ -41,15 +41,9 @@ export const LogoBox = styled.div`
   gap: ${space[2]};
   img {
     display: block;
-    height: 80px;
+    height: 100px;
     width: auto;
   }
-`;
-
-export const Title = styled.h1`
-  font-size: 50px;
-  font-weight: 700;
-  margin: 0;
 `;
 
 export const Controls = styled.section`

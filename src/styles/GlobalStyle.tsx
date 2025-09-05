@@ -3,10 +3,10 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after { box-sizing: border-box; }
   html, body, #root { height: 100%; }
+
   @font-face {
     font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff:wght@400;500;600;700') format('woff');
-    font-weight: 100;
+    src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css");
     font-display: swap;
 }
   body {

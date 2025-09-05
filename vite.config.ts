@@ -10,7 +10,7 @@ export default defineConfig({
       // 필요 시 세부 설정
     }),
   ],
-  base: '/knitting-text/',
+  base: '/',
   resolve: {
     alias: {
       util: "util/",

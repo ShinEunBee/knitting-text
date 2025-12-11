@@ -3,6 +3,7 @@ import type { Grid } from "./features/types";
 import { saveGrid } from "./features/saveGrid";
 import { renderGrid } from "./features/renderGrid";
 import PatternGrid from "./components/PatternGrid";
+import VisitorCounter from "./components/VisitorCounter";
 import {
   Header,
   LogoBox,
@@ -60,6 +61,7 @@ export default function App() {
         </SvgContainer>
       </Container>
 
+      <VisitorCounter />
       <Footer>© {new Date().getFullYear()} ggang2</Footer>
     </>
   );
